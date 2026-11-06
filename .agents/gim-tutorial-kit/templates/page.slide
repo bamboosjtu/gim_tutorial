@@ -1,0 +1,65 @@
+<Slide style={{ width: 1280, height: 720, padding: 60, background: '#FFFFFF' }}>
+    <Text style={{ fontSize: 33, fontWeight: 'bold', color: '#1E293B' }}>
+        每级一把钥匙：键名不是约定，是标准一张表一张表写死的
+    </Text>
+    <Text style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>
+        带 <code>.NUM</code> 的键说"本层有几条"，带序号 <code>&lt;n&gt;</code> 的键说"下一条去哪儿"
+    </Text>
+    <Box style={{ width: 1160, height: 2, background: '#E2E8F0', margin: '14px 0 18px' }} />
+
+    <Box style={{ flexDirection: 'row', gap: 26 }}>
+        <Box style={{ width: 790 }}>
+            <Table
+                style={{ width: '100%', height: 468 }}
+                defaultTextStyle={{ fontSize: 14, textAlign: 'left', color: '#1E293B' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#E2E8F0' }, right: { width: 1, color: '#E2E8F0' },
+                        top: { width: 1, color: '#E2E8F0' }, bottom: { width: 1, color: '#E2E8F0' },
+                    },
+                    padding: '6px 11px',
+                }}
+                cells={[
+                    [
+                        { text: '层级跳转', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#2563EB' } } },
+                        { text: '引用键', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#2563EB' } } },
+                        { text: '计数键', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#2563EB' } } },
+                        { text: '条文', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#2563EB' } } },
+                    ],
+                    ['根 → 1 级', 'SUBSYSTEM', '—', '表 A.17'],
+                    ['1 → 2 级', 'SECTION<n>', 'SECTIONS.NUM', '表 A.18'],
+                    [{ text: '2 → 3 级', cellStyle: { background: { color: '#F8FAFC' } } }, { text: 'STRAINSECTION<n>', cellStyle: { background: { color: '#F8FAFC' } } }, { text: 'STRAINSECTIONS.NUM', cellStyle: { background: { color: '#F8FAFC' } } }, { text: '表 A.19', cellStyle: { background: { color: '#F8FAFC' } } }],
+                    ['3 → 4 级', 'GROUP<n>', 'GROUPS.NUM', '表 A.20'],
+                    [{ text: '4 塔组 → 5', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'TOWER<n> / STRING<n>.STRING / BASE<n>', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'TOWERS / STRINGS / BASES .NUM', cellStyle: { background: { color: '#FFF7ED' } } }, { text: '表 A.21', cellStyle: { background: { color: '#FFF7ED' } } }],
+                    [{ text: '4 导体组 → 5', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'SUBDEVICE<n>', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'SUBDEVICES.NUM', cellStyle: { background: { color: '#FFF7ED' } } }, { text: '表 A.22', cellStyle: { background: { color: '#FFF7ED' } } }],
+                    [{ text: '4 通道地物 → 5', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'SUBDEVICE<n>', cellStyle: { background: { color: '#FFF7ED' } } }, { text: 'SUBDEVICES.NUM', cellStyle: { background: { color: '#FFF7ED' } } }, { text: '表 A.23', cellStyle: { background: { color: '#FFF7ED' } } }],
+                    ['5 级 → 几何', 'OBJECTMODELPOINTER', '—', '表 A.24~A.27'],
+                ]}
+            />
+        </Box>
+
+        <Box style={{ flex: 1 }}>
+            <Box style={{ padding: '16px 18px', background: '#FFFBEB', borderRadius: 8, border: '1px solid #FDE68A' }}>
+                <Text style={{ fontSize: 15, color: '#B45309', fontWeight: 'bold' }}>三个容易读错的地方</Text>
+                <Text style={{ fontSize: 13.5, color: '#92400E', lineHeight: 1.85, marginTop: 8 }}>
+                    <b>① NUM 必填。</b>数量为 0 时字段仍要输出，值是 0——<br />
+                    所以"有键无值"≠"没这个键"。<br />
+                    <b>② 第 4 级有三套键。</b>同是 F4SYSTEM，
+                    按 GROUPTYPE 分成塔组 / 导体组 / 通道地物组，键组完全不同。<br />
+                    <b>③ 塔组的 BASEFAMILY 是空值。</b>标准写明"值为空"，
+                    拿它去找 fam 必然落空。
+                </Text>
+            </Box>
+            <Box style={{ marginTop: 14, padding: '14px 18px', background: '#F8FAFC', borderRadius: 8 }}>
+                <Text style={{ fontSize: 14, color: '#334155', lineHeight: 1.75 }}>
+                    <b>记法：</b>一级一把钥匙，各级互不通用。
+                    只认 <code>SUBDEVICE</code> 的通用遍历器，走到第 1 级就停住了。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ position: 'absolute', left: 60, top: 670 }}>
+        <Text style={{ fontSize: 13, color: '#94A3B8' }}>Q/GDW 11809—2023 附录 A.4.3~A.4.13 各表</Text>
+    </Box>
+</Slide>
